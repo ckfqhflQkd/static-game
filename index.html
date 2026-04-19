@@ -4729,6 +4729,7 @@ function renderScene(sceneKey) {
       });
     });
     grid.style.display = 'grid';
+  setTimeout(() => { if (typeof updateMobileInspect === 'function') updateMobileInspect(); }, 30);
     if (divider) divider.style.display = 'block';
   } else {
     grid.innerHTML = '';
@@ -5223,18 +5224,8 @@ function mobileTab(tab, el) {
     openInventory();
   } else if (tab === 'map') {
     openMap();
-  } else if (tab === 'menu') {
-    // 메뉴 팝업
-    const popup = document.getElementById('mobile-menu-popup');
-    if (popup) popup.classList.add('open');
-    // 도트 동기화
-    const sbDots = document.getElementById('sb-dots');
-    const mobileDots = document.getElementById('mobile-sb-dots');
-    if (sbDots && mobileDots) mobileDots.innerHTML = sbDots.innerHTML;
-    // 날짜 동기화
-    const dateEl = document.getElementById('tb-date');
-    const mobileDate = document.getElementById('mobile-sb-date-text');
-    if (dateEl && mobileDate) mobileDate.textContent = dateEl.textContent;
+  } else if (tab === 'settings') {
+    openSettings();
   }
 }
 
@@ -8568,7 +8559,7 @@ async function getUid() {
   <button class="mobile-tab" onclick="mobileTab('clues', this)">CLUES</button>
   <button class="mobile-tab" onclick="mobileTab('inv', this)">INV</button>
   <button class="mobile-tab" onclick="mobileTab('map', this)">MAP</button>
-  <button class="mobile-tab" onclick="mobileTab('menu', this)">MENU</button>
+  <button class="mobile-tab" onclick="mobileTab('settings', this)">SETTINGS</button>
 </div>
 
 <!-- 모바일 메뉴 팝업 -->
