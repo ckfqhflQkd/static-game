@@ -6680,6 +6680,12 @@ function closeMsn() {
   document.getElementById('msn-overlay').style.display = 'none';
   msnOpened = false;
 
+  // 09.14 밤 그룹챗 씬 — 닫으면 다음 씬으로
+  if (currentScene === 'CH2_DAY3_HOME') {
+    goScene('CH2_DAY3_HOME_AFTER');
+    return;
+  }
+
   // 09.13 저녁 MSN 씬 — 닫을 때 day2MsnDone 체크
   if (currentScene === 'CH2_DAY2_EVENING_MSN') {
     const who = window._day2CurrentWho;
@@ -8267,7 +8273,7 @@ function selectDay2Reply(idx, who) {
   <div style="background:#d4d0c8;border:2px solid;border-color:#fff #808080 #808080 #fff;width:240px;">
     <div style="background:#000080;color:#fff;padding:2px 6px;display:flex;justify-content:space-between;align-items:center;">
       <span>MSN 메신저 — 그룹 채팅</span>
-      <span onclick="document.getElementById('msn-popup-group').style.display='none'" style="cursor:pointer;font-size:10px;">x</span>
+      <span onclick="document.getElementById('msn-popup-group').style.display='none'; if(currentScene==='CH2_DAY3_HOME') goScene('CH2_DAY3_HOME_AFTER');" style="cursor:pointer;font-size:10px;">x</span>
     </div>
     <div style="padding:8px;display:flex;gap:8px;align-items:center;">
       <div style="width:32px;height:32px;background:#b8a040;border:1px solid #888;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:bold;">K</div>
