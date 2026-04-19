@@ -1584,6 +1584,65 @@ body:not(.light).vision-active #main-content {
 .scanline-overlay{display:none;position:fixed;inset:0;pointer-events:none;z-index:9999}.scanline-overlay.active{display:block}
 .scanline-overlay.active::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 80% at center,transparent 55%,rgba(0,0,0,0.25) 75%,rgba(0,0,0,0.45) 100%);pointer-events:none}
 .scanline-overlay.active::after{content:'';position:fixed;inset:0;pointer-events:none;opacity:0.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E")}.settings-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;align-items:center;justify-content:center}.settings-overlay.show{display:flex}.settings-window{background:var(--ov-bg);border:1px solid var(--ov-border);width:320px;font-family:'Pretendard',-apple-system,sans-serif}.settings-titlebar{background:var(--ov-bg2);border-bottom:1px solid var(--ov-border);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:0.1em;color:var(--ov-section)}.settings-close{cursor:pointer;color:var(--ov-text-dim);font-size:11px}.settings-close:hover{color:var(--ov-text)}.settings-body{padding:16px}.settings-row{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--ov-border)}.settings-row:last-child{border-bottom:none}.settings-label{font-size:11px;color:var(--ov-text-dim);letter-spacing:0.05em}.settings-label span{font-size:10px;color:var(--ov-section);display:block;margin-top:2px}.settings-toggle{width:36px;height:18px;background:var(--ov-bg2);border:1px solid var(--ov-border);border-radius:9px;position:relative;cursor:pointer;transition:background 0.2s}.settings-toggle.on{background:var(--accent);border-color:var(--accent)}.settings-toggle::after{content:'';position:absolute;width:12px;height:12px;background:var(--ov-text-dim);border-radius:50%;top:2px;left:2px;transition:left 0.2s,background 0.2s}.settings-toggle.on::after{left:20px;background:white}.settings-font-btns{display:flex;gap:4px}.settings-font-btn{padding:3px 8px;font-size:10px;background:var(--ov-bg2);border:1px solid var(--ov-border);color:var(--ov-text-dim);cursor:pointer}.settings-font-btn.active{border-color:var(--accent);color:var(--accent)}.settings-danger-btn{padding:4px 12px;font-size:10px;background:transparent;border:1px solid #cc4444;color:#cc4444;cursor:pointer}.settings-danger-btn:hover{background:#cc4444;color:white}
+
+/* ── 모바일 반응형 ── */
+@media (max-width: 768px) {
+  .game-shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: 44px auto 1fr auto;
+    height: 100dvh;
+  }
+  .topbar {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 9px;
+    padding: 0 8px;
+    gap: 6px;
+  }
+  .tb-logo { font-size: 11px; }
+  .tb-date-wrap { font-size: 8px; }
+  #tb-date { font-size: 8px; }
+  .sidebar {
+    grid-column: 1;
+    grid-row: 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 8px 10px;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .sb-info { display: none; }
+  .sb-menu-label { display: none; }
+  .sb-dots { display: none; }
+  .sb-menu { flex-direction: row; gap: 4px; flex-wrap: wrap; }
+  .sb-menu-item {
+    font-size: 9px;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .story-panel {
+    grid-column: 1;
+    grid-row: 3;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .story-scroll { padding: 16px 14px; }
+  .choices-area { padding: 10px 14px; }
+  .inspect-panel {
+    grid-column: 1;
+    grid-row: 4;
+    border-top: 1px solid var(--border);
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .inspect-grid { grid-template-columns: repeat(3, 1fr); }
+  .passage { font-size: 13px; line-height: 1.9; }
+  .choice-btn { font-size: 10px; padding: 8px 12px; }
+}
 </style>
 </head>
 <body>
