@@ -5206,11 +5206,11 @@ function bgmVolume(val) {
 // ── 모바일 탭바 ──
 function isMobile() { return window.innerWidth <= 768; }
 
-function mobileTab(tab) {
+function mobileTab(tab, el) {
   if (!isMobile()) return;
   // 탭 활성화
   document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
-  event.currentTarget.classList.add('active');
+  if (el) el.classList.add('active');
 
   // 모든 팝업 닫기
   document.querySelectorAll('.mobile-popup').forEach(p => p.classList.remove('open'));
@@ -8549,6 +8549,49 @@ async function getUid() {
 })();
 
 </script>
+
+
+<!-- 모바일 인스펙트 버튼 래퍼 -->
+<div id="mobile-inspect-wrap" style="display:none;"></div>
+
+<!-- 모바일 인스펙트 결과 팝업 -->
+<div id="mobile-inspect-popup">
+  <div id="mobile-inspect-content">
+    <button id="mobile-inspect-close" onclick="closeMobileInspect()">[ 닫기 ]</button>
+    <div id="mobile-inspect-text"></div>
+  </div>
+</div>
+
+<!-- 하단 탭바 -->
+<div id="mobile-tabbar">
+  <button class="mobile-tab active" onclick="mobileTab('story', this)">STORY</button>
+  <button class="mobile-tab" onclick="mobileTab('clues', this)">CLUES</button>
+  <button class="mobile-tab" onclick="mobileTab('inv', this)">INV</button>
+  <button class="mobile-tab" onclick="mobileTab('map', this)">MAP</button>
+  <button class="mobile-tab" onclick="mobileTab('menu', this)">MENU</button>
+</div>
+
+<!-- 모바일 메뉴 팝업 -->
+<div class="mobile-popup" id="mobile-menu-popup">
+  <div class="mobile-popup-header">
+    // MENU
+    <button class="mobile-popup-close" onclick="closeMobilePopup('menu')">[ 닫기 ]</button>
+  </div>
+  <div class="mobile-popup-body">
+    <div style="display:flex;flex-direction:column;gap:12px;padding-top:8px;">
+      <div style="font-family:var(--font-ui);font-size:9px;color:var(--dim);letter-spacing:0.1em;padding-bottom:8px;border-bottom:1px solid var(--border);">
+        <span id="mobile-sb-date-text"></span>
+      </div>
+      <button onclick="openCasefile();closeMobilePopup('menu');" style="background:none;border:1px solid var(--border);color:var(--text);font-family:var(--font-ui);font-size:11px;letter-spacing:0.15em;padding:12px;cursor:pointer;text-align:left;">· CASE FILE</button>
+      <button onclick="openInventory();closeMobilePopup('menu');" style="background:none;border:1px solid var(--border);color:var(--dim);font-family:var(--font-ui);font-size:11px;letter-spacing:0.15em;padding:12px;cursor:pointer;text-align:left;">INVENTORY</button>
+      <button onclick="openSettings();closeMobilePopup('menu');" style="background:none;border:1px solid var(--border);color:var(--dim);font-family:var(--font-ui);font-size:11px;letter-spacing:0.15em;padding:12px;cursor:pointer;text-align:left;">SETTINGS</button>
+      <div style="margin-top:8px;border-top:1px solid var(--border);padding-top:8px;">
+        <div style="font-family:var(--font-ui);font-size:9px;color:var(--dim);letter-spacing:0.1em;margin-bottom:8px;">// CLUES</div>
+        <div id="mobile-sb-dots"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
