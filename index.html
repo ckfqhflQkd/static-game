@@ -2988,6 +2988,14 @@ const CLUES = {
   pier_sound_night:  { rcId: 'rc-pier-sound-night',      label: '귀 안쪽 울림 (새벽)',       isRed: false, notify: true  },
   pier_sea:          { rcId: 'rc-pier-sea',               label: '바다',                     isRed: false, notify: false },
   pier_vision:       { rcId: 'rc-pier-vision',            label: '방파제 잔상',              isRed: true,  notify: true  },
+  red_havenfield:    { rcId: null, label: '하벤필드 — 처음부터',    isRed: true,  notify: true },
+  red_kyle:          { rcId: null, label: '같은 사람 — GRY-0089',   isRed: true,  notify: true },
+  clue_sign_1987:    { rcId: null, label: '1987년 기호 연결',        isRed: false, notify: true },
+  clue_everett_plan: { rcId: null, label: '에버렛의 계획',           isRed: false, notify: true },
+  clue_everett_alone:{ rcId: null, label: '혼자서',                 isRed: false, notify: true },
+  clue_g4:           { rcId: null, label: 'G-4 — 지하 4층',         isRed: false, notify: true },
+  clue_connection:   { rcId: null, label: '연결고리',               isRed: false, notify: true },
+  bus_envelope:      { rcId: null, label: '벤치 밑 봉투',           isRed: false, notify: true },
 };
 
 // ── 씬별 조사포인트 ──
@@ -5641,6 +5649,78 @@ const CF_TABS = {
         desc: '고등학생. 19세. 185cm. 아르바이트를 하는 곳에서 만났다.<br><br>항상 작게 웃는 얼굴을 하고있다. 롤러 스케이트를 잘 타던데, 누구한테 배운걸까? 생각도 많고 아는 것도 많아보인다. 항상 품에 쥐고 있는 노트를 가끔 몰래 보려고 하면 자연스럽게 다시 주머니에 넣는다. 가만히 보고 있으면 무슨 생각을 하는지 궁금해진다. 가끔 눈이 마주치면 별 의미 없이 웃어주는 착한 사람같다.', found: true },
       { id: 'katelyn', name: '???', role: '???', img: null, desc: '', found: false },
       { id: 'kyle', name: '???', role: '???', img: null, desc: '', found: false },
+
+      // ── 거실/주방/발렌 방 ──
+      { key: 'blanket',          name: '에버렛 담요',              tag: 'HOME',     isRed: false },
+      { key: 'tv',               name: '꺼진 TV',                  tag: 'HOME',     isRed: false },
+      { key: 'pamphlet',         name: '캠프 팸플릿 — 하벤필드',   tag: 'HAVEN',    isRed: false },
+      { key: 'clock',            name: '벽시계',                   tag: 'HOME',     isRed: false },
+      { key: 'shelf',            name: '주방 선반',                 tag: 'HOME',     isRed: false },
+      { key: 'desk',             name: '책상',                     tag: 'EVERETT',  isRed: false },
+      { key: 'lockscreen',       name: '잠금화면',                  tag: 'EVERETT',  isRed: false },
+      { key: 'earphone',         name: '이브 이어폰',               tag: 'EVERETT',  isRed: false },
+      { key: 'charger',          name: '빈 충전기',                 tag: 'EVERETT',  isRed: false },
+      { key: 'calendar',         name: '이브 달력',                 tag: 'EVERETT',  isRed: false },
+      { key: 'bookshelf',        name: '책장 귀퉁이 (40Hz)',        tag: 'EVERETT',  isRed: false },
+      { key: 'plant',            name: '창가 화분',                 tag: 'HOME',     isRed: false },
+      { key: 'drawer_note',      name: '서랍 낙서',                 tag: 'RED',      isRed: true  },
+      { key: 'radio',            name: '라디오',                   tag: 'EVERETT',  isRed: false },
+      { key: 'trophies',         name: '트로피들',                  tag: 'HOME',     isRed: false },
+      // ── 롤러장 ──
+      { key: 'rink_music',       name: '롤러장 음악',               tag: 'RINK',     isRed: false },
+      { key: 'rink_skates',      name: '스케이트 신발들',            tag: 'RINK',     isRed: false },
+      // ── 맥도날드 ──
+      { key: 'mcd_window',       name: '창문 너머 — 학교 방향',     tag: 'AREA',     isRed: false },
+      // ── 호수 ──
+      { key: 'lake_surface',     name: '호수 수면',                 tag: 'AREA',     isRed: false },
+      { key: 'lake_pier',        name: '방파제 끝',                 tag: 'AREA',     isRed: false },
+      { key: 'lake_grass',       name: '호수 풀숲',                 tag: 'AREA',     isRed: false },
+      // ── 연구소 외곽 1일차 ──
+      { key: 'fence_sign',       name: '철망 기호',                 tag: 'HAVEN',    isRed: false },
+      { key: 'fence_ground',     name: '기둥 바닥 흙',              tag: 'HAVEN',    isRed: false },
+      { key: 'research_light',   name: '연구소 불빛',               tag: 'HAVEN',    isRed: false },
+      // ── 주차장 ──
+      { key: 'parking_plate',    name: 'GRY-0089',                  tag: 'HAVEN',    isRed: false },
+      // ── 성당 ──
+      { key: 'church_seat',      name: '이브 자리',                 tag: 'EVERETT',  isRed: false },
+      { key: 'church_inside',    name: '성당 내부',                  tag: 'AREA',     isRed: false },
+      // ── 헤이워드 1일차 ──
+      { key: 'hayward_radio',    name: '라디오',                   tag: 'HAVEN',    isRed: false },
+      { key: 'hayward_photo',    name: '벽 사진',                   tag: 'HAVEN',    isRed: false },
+      { key: 'hayward_garden',   name: '창밖 화분',                 tag: 'AREA',     isRed: false },
+      // ── 해안가 2일차 ──
+      { key: 'beach2_sound',     name: '귀 안쪽 울림',              tag: 'SIGNAL',   isRed: false },
+      // ── 도서관 2일차 ──
+      { key: 'library2_film',    name: '마이크로필름 기기',          tag: 'PATTERN',  isRed: false },
+      { key: 'library2_seat',    name: '창문 없는 자리',             tag: 'AREA',     isRed: false },
+      // ── 모텔 ──
+      { key: 'motel_photo',      name: '1950년대 그레이포트',        tag: 'AREA',     isRed: false },
+      { key: 'motel_keys',       name: '열쇠들',                   tag: 'AREA',     isRed: false },
+      { key: 'motel_counter',    name: '할아버지',                  tag: 'AREA',     isRed: false },
+      // ── 폐건물 ──
+      { key: 'building_graffiti',name: '벽 낙서',                   tag: 'AREA',     isRed: false },
+      { key: 'building_ceiling', name: '무너진 천장',               tag: 'AREA',     isRed: false },
+      // ── 헤이워드 2일차 ──
+      { key: 'hayward2_radio',   name: '라디오 (2일차)',             tag: 'HAVEN',    isRed: false },
+      { key: 'hayward2_tea',     name: '차',                        tag: 'AREA',     isRed: false },
+      // ── 해안가 3일차 ──
+      { key: 'beach3_bench',     name: '벤치 (티미)',               tag: 'EVERETT',  isRed: false },
+      { key: 'beach3_wave',      name: '파도 소리',                 tag: 'SIGNAL',   isRed: false },
+      { key: 'beach3_sign',      name: '방파제 기호 (2일차)',        tag: 'HAVEN',    isRed: false },
+      // ── 도서관 3일차 ──
+      { key: 'library3_seat',    name: '이브 자리 (2일차)',          tag: 'EVERETT',  isRed: false },
+      { key: 'library3_window',  name: '창문',                      tag: 'AREA',     isRed: false },
+      // ── 연구소 외곽 2일차 ──
+      { key: 'research2_fence',  name: 'G-4 (2일차)',               tag: 'HAVEN',    isRed: false },
+      { key: 'research2_light',  name: '5층 불빛',                  tag: 'HAVEN',    isRed: false },
+      // ── 발렌 방 (09.14) ──
+      { key: 'valen_phone',      name: '모르는 번호',               tag: 'KYLE',     isRed: false },
+      { key: 'valen_window2',    name: '창문 (09.14 밤)',            tag: 'AREA',     isRed: false },
+      { key: 'valen_clothes',    name: '옷',                        tag: 'HOME',     isRed: false },
+      // ── 방파제 새벽 ──
+      { key: 'pier_sign_night',  name: '방파제 기호 (새벽)',         tag: 'HAVEN',    isRed: false },
+      { key: 'pier_sound_night', name: '귀 안쪽 울림 (새벽)',        tag: 'SIGNAL',   isRed: false },
+      { key: 'pier_sea',         name: '바다',                      tag: 'AREA',     isRed: false },
     ];
 
     const rows = chars.map(function(c) {
@@ -7632,11 +7712,41 @@ let ieCurrentPage = 'home';
 let ieAdShown = false;
 
 function openIEWithQuery(q) {
-  openIE();
+  closeCasefile();
   setTimeout(() => {
-    const input = document.getElementById('ie-search-input');
-    if (input) { input.value = q; ieDoSearch(); }
-  }, 100);
+    openIE();
+    setTimeout(() => {
+      const input = document.getElementById('ie-search-input');
+      if (input) {
+        input.value = q;
+        // 케이스파일 추천 검색어는 제한 없이 검색
+        ieDoSearchUnlimited();
+      }
+    }, 150);
+  }, 50);
+}
+
+function ieDoSearchUnlimited() {
+  const inp = document.getElementById('ie-search-input');
+  if (!inp) return;
+  const q = inp.value.trim();
+  if (!q) return;
+  const key = Object.keys(SEARCH_DATA).find(k =>
+    SEARCH_DATA[k].query.replace(/"/g,'').includes(q) || q.includes(SEARCH_DATA[k].query.replace(/"/g,''))
+  );
+  if (key) {
+    // searchCount 체크 없이 결과 표시
+    if (!searchedKeys.has(key)) {
+      searchedKeys.add(key);
+      const data = SEARCH_DATA[key];
+      if (data.clueKey && CLUES[data.clueKey]) inspect(data.clueKey);
+      ieHistory.push(key);
+    }
+    ieShowResult(key, false);
+    document.getElementById('ie-back-btn').style.color = '#000';
+  } else {
+    ieShowNoResult(q);
+  }
 }
 
 function openIE() {
