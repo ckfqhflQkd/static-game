@@ -1895,6 +1895,93 @@ body:not(.light).vision-active #main-content {
     flex-direction: column !important;
   }
 
+  /* MSN 창 모바일 전체화면 */
+  #msn-main {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .msn-body {
+    flex: 1 !important;
+    height: auto !important;
+    flex-direction: column !important;
+  }
+  .msn-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 80px !important;
+    border-right: none !important;
+    border-bottom: 2px inset #808080 !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 2px !important;
+    overflow-y: hidden !important;
+    overflow-x: auto !important;
+  }
+  .msn-chat-area {
+    flex: 1 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 0 !important;
+  }
+  .msn-messages {
+    flex: 1 !important;
+    overflow-y: auto !important;
+  }
+  .msn-choice-area {
+    flex-direction: column !important;
+    gap: 4px !important;
+  }
+  .msn-choice-btn {
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+  /* IE 창 모바일 전체화면 */
+  .ie-window {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .ie-content {
+    flex: 1 !important;
+    overflow-y: auto !important;
+  }
+
+  /* MSN 팝업 모바일 */
+  #msn-popup {
+    width: 90% !important;
+    bottom: 30% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+
+  /* 그룹채팅 모바일 */
+  #msn-overlay > div {
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;
+    border-radius: 0 !important;
+  }
+
+  /* 사건 개요 모바일 1단 */
+  .cf-overview {
+    grid-template-columns: 1fr !important;
+  }
+
 }
 
 /* 데스크탑에서 모바일 요소 숨김 */
