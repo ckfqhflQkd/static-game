@@ -2179,7 +2179,7 @@ body:not(.light).vision-active #main-content {
       
     </div>
 
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="테마 전환">LIGHT</button>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="테마 전환">○</button>
   </div>
 
   <!-- 회원가입 모달 -->
@@ -6665,7 +6665,7 @@ const placeMemosMap = {};
 function toggleTheme() {
   const isLight = document.body.classList.toggle('light');
   const btn = document.getElementById('theme-toggle');
-  if (btn) btn.textContent = isLight ? 'DARK' : 'LIGHT';
+  if (btn) btn.textContent = isLight ? '●' : '○';
   try { localStorage.setItem('static-theme', isLight ? 'light' : 'dark'); } catch(e) {}
 }
 
