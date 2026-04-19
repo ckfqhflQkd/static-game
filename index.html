@@ -1797,6 +1797,104 @@ body:not(.light).vision-active #main-content {
     height: 100% !important;
     border-radius: 0 !important;
   }
+  /* 상단바 로그인 영역 모바일 축소 */
+  #sp-guest input {
+    width: 70px !important;
+    height: 20px !important;
+    font-size: 8px !important;
+    padding: 0 5px !important;
+  }
+  #sp-guest button {
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 8px !important;
+    letter-spacing: 0.05em !important;
+  }
+  #sp-user button {
+    height: 20px !important;
+    padding: 0 5px !important;
+    font-size: 7px !important;
+  }
+  #sp-username {
+    font-size: 8px !important;
+    max-width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .theme-toggle {
+    width: 20px !important;
+    height: 20px !important;
+    font-size: 8px !important;
+    flex-shrink: 0;
+  }
+  #tb-date { 
+    font-size: 7px !important; 
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .tb-logo { font-size: 11px !important; flex-shrink: 0; }
+  .topbar { gap: 4px !important; padding: 0 6px !important; overflow: hidden; }
+
+  /* 케이스파일 — 왼쪽 nav → 상단 탭으로 */
+  .casefile-window {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    border-radius: 0 !important;
+  }
+  .cf-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column !important;
+    overflow: hidden;
+  }
+  .cf-nav {
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 6px 8px !important;
+    gap: 4px !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--ov-border) !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    scrollbar-width: none;
+  }
+  .cf-nav::-webkit-scrollbar { display: none; }
+  .cf-section { display: none !important; }
+  .cf-nav-item {
+    white-space: nowrap !important;
+    font-size: 9px !important;
+    padding: 4px 10px !important;
+    border: 1px solid var(--ov-border) !important;
+    flex-shrink: 0 !important;
+  }
+  .cf-main {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    width: 100% !important;
+  }
+  /* 관련 인물 이름 세로 깨짐 방지 */
+  .cf-clue-name {
+    word-break: keep-all !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100px !important;
+  }
+  .cf-clue-header {
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+  }
+  /* 관련 인물 드롭다운 사진 영역 */
+  .cf-clue-dropdown > div {
+    flex-direction: column !important;
+  }
+
 }
 
 /* 데스크탑에서 모바일 요소 숨김 */
@@ -1804,6 +1902,7 @@ body:not(.light).vision-active #main-content {
   #mobile-tabbar { display: none !important; }
   #mobile-inspect-wrap { display: none !important; }
   #mobile-inspect-popup { display: none !important; }
+  .mobile-popup { display: none !important; }
 }
 </style>
 </head>
