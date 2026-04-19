@@ -5430,7 +5430,6 @@ function updateMobileInspect() {
   const wrap = document.getElementById('mobile-inspect-wrap');
   const grid = document.getElementById('inspect-grid');
   if (!wrap || !grid) return;
-  // inspect-grid 버튼들을 모바일 래퍼에 복사
   if (grid.children.length > 0) {
     wrap.style.display = 'flex';
     wrap.innerHTML = '';
@@ -5446,6 +5445,7 @@ function updateMobileInspect() {
     });
   } else {
     wrap.style.display = 'none';
+    wrap.innerHTML = '';
   }
 }
 
