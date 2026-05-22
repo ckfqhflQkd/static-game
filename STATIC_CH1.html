@@ -12176,9 +12176,9 @@ function _renderMainReceiptBase(key, item, isPending, finder) {
   html += '</div>';
   html += '<div class="inv2-stars">********************************</div>';
 
-  // 이미지 placeholder
+  // 이미지 (실제 이미지 → 로드 실패 시 placeholder 폴백)
   html += '<div class="inv2-imgwrap">';
-  html += '<div class="inv2-imgwrap-placeholder">[ ITEM IMAGE ]<br>600 × 180px</div>';
+  html += _renderItemImageHtml(key, { fontSize: '11px', placeholderText: '[ ITEM IMAGE ]<br>600 × 180px' });
   html += '</div>';
 
   // TYPE / DATE / STAGE / FOUND (합침) / FOUND BY / STATUS
@@ -12270,16 +12270,16 @@ function _renderMiniReceipt(key, isPending, finder, pos, dataKeyForClick) {
     case 'v8': return open + _renderMiniV8(labelEn, labelKr, isPending, metaRows, key) + '</div>';
     // 구 시스템 호환
     case 'memo':     return open + _renderMiniMemo(labelKr, isPending) + '</div>';
-    case 'polaroid': return open + _renderMiniPolaroid(labelKr, labelEn, isPending) + '</div>';
+    case 'polaroid': return open + _renderMiniPolaroid(labelKr, labelEn, isPending, key) + '</div>';
     case 'keycard':  return open + _renderMiniKeycard(labelKr, labelEn, isPending) + '</div>';
     case 'envelope': return open + _renderMiniEnvelope(labelKr, isPending) + '</div>';
     case 'receipt':
-    default:         return open + _renderMiniReceiptBody(labelKr, isPending) + '</div>';
+    default:         return open + _renderMiniReceiptBody(labelKr, isPending, key) + '</div>';
   }
 }
 
 // ── 미니 RECEIPT — 세로 길쭉, 별표 + 점선 + 한글명 + 별표 + IMG ──
-function _renderMiniReceiptBody(labelKr, isPending) {
+function _renderMiniReceiptBody(labelKr, isPending, key) {
   let h = '';
   h += isPending
     ? '<div class="inv2-stars inv2-stars-mini pending-tag">***** PENDING *****</div>'
@@ -12290,7 +12290,7 @@ function _renderMiniReceiptBody(labelKr, isPending) {
   h += '<span class="inv2-itemname-kr">' + _escHtml(labelKr) + '</span>';
   h += '</div>';
   h += '<div class="inv2-stars inv2-stars-mini">**********************</div>';
-  h += '<div class="inv2-imgwrap-mini"><div class="inv2-imgwrap-placeholder" style="font-size:9px;">[ IMG ]</div></div>';
+  h += '<div class="inv2-imgwrap-mini">' + _renderItemImageHtml(key, { fontSize: '9px' }) + '</div>';
   if (isPending) {
     h += '<div class="inv2-divider inv2-divider-mini"></div>';
     h += '<div class="inv2-pending-tag">NOT SHARED</div>';
@@ -12310,10 +12310,23 @@ function _renderMiniMemo(labelKr, isPending) {
 }
 
 // ── 미니 POLAROID — 큰 이미지 박스 + 하단 손글씨 캡션 ──
-function _renderMiniPolaroid(labelKr, labelEn, isPending) {
+// 공통: 아이템 키로 이미지 HTML 생성. 로드 실패 시 자동으로 플레이스홀더로 폴백.
+function _renderItemImageHtml(key, options = {}) {
+  const k = String(key || '').trim();
+  const fontSize = options.fontSize || '10px';
+  const placeholderText = options.placeholderText || '[ IMG ]';
+  if (!k) return '<div class="inv2-imgwrap-placeholder" style="font-size:' + fontSize + ';">' + placeholderText + '</div>';
+  // onerror 로 자기 자신을 placeholder DIV 로 교체 (이미지 없으면 [ IMG ] 표시)
+  const fallback = "this.outerHTML='<div class=\\'inv2-imgwrap-placeholder\\' style=\\'font-size:" + fontSize + ";\\'>" + placeholderText + "</div>'";
+  return '<img src="images/ch1/' + _escHtml(k) + '.png" alt="" '
+       + 'style="width:100%;height:100%;object-fit:contain;display:block;" '
+       + 'onerror="' + fallback + '">';
+}
+
+function _renderMiniPolaroid(labelKr, labelEn, isPending, key) {
   let h = '';
   h += '<div class="inv2-polaroid-img">';
-  h += '<div class="inv2-polaroid-img-placeholder">[ IMG ]</div>';
+  h += _renderItemImageHtml(key, { fontSize: '10px' });
   h += '</div>';
   h += '<div class="inv2-polaroid-caption">' + _escHtml(labelKr) + '</div>';
   return h;
@@ -12380,7 +12393,7 @@ function _renderMiniV1(labelEn, labelKr, isPending, meta, key) {
   let h = '';
   h += '<div class="v-hdr-en">' + _escHtml(labelEn) + '</div>';
   h += '<div class="v-hdr-sub">─ ' + tag + ' ─</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v-name-kr">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'dash', 4);
   h += _renderMiniBarcode(key);
@@ -12396,7 +12409,7 @@ function _renderMiniV2(labelEn, labelKr, isPending, meta, key) {
     : labelEn;
   let h = '';
   h += '<div class="v2-bighdr">' + big + '</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v-name-kr" style="text-align:left;">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'solid', 3);
   h += _renderMiniBarcode(key);
@@ -12412,7 +12425,7 @@ function _renderMiniV3(labelEn, labelKr, isPending, meta, key) {
   h += '<span class="v3-num">No. ' + num + '</span>';
   h += '</div>';
   h += '<div class="v3-title">' + _escHtml(labelEn) + '</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v-name-kr">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'dash', 4);
   h += _renderMiniBarcode(key);
@@ -12428,7 +12441,7 @@ function _renderMiniV4(labelEn, labelKr, isPending, meta, key) {
   h += '<div class="v4-body">';
   h += '<div class="v4-hdr">' + _escHtml(labelEn) + '</div>';
   h += '<div class="v-hdr-sub">─ DOCUMENT ─</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v-name-kr">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'solid', 4);
   h += _renderMiniBarcode(key);
@@ -12442,7 +12455,7 @@ function _renderMiniV5(labelEn, labelKr, isPending, meta, key, metaObj) {
   let h = '';
   h += '<div class="v5-hdr">★ ' + _escHtml(labelEn) + '</div>';
   h += '<div class="v5-sub">─ MEMO ─</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   // 좌표 단서 — metaObj.coord 있으면 박스 안에 표시
   const coord = (metaObj && metaObj.coord) ? metaObj.coord : '40°44\'12"N · 73°35\'27"W';
   h += '<div class="v5-coord-box">' + _escHtml(coord) + '</div>';
@@ -12458,7 +12471,7 @@ function _renderMiniV6(labelEn, labelKr, isPending, meta, key) {
   h += '<div class="v6-side-left">STATIC · STATIC</div>';
   h += '<div class="v6-side-right">CH1 · CH1 · CH1</div>';
   h += '<div class="v6-hdr">' + _escHtml(labelEn) + '</div>';
-  h += '<div class="v6-roundimg"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v6-roundimg">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v-name-kr">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'dash', 3);
   h += _renderMiniBarcode(key);
@@ -12486,7 +12499,7 @@ function _renderMiniV7(labelEn, labelKr, isPending, meta, key) {
     h += '<div class="v-row"><span>03 · NOTE</span><span>1</span></div>';
   }
   h += '<div class="v7-dashline">─────────────────</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += _renderMiniBarcode(key);
   return h;
 }
@@ -12495,7 +12508,7 @@ function _renderMiniV7(labelEn, labelKr, isPending, meta, key) {
 function _renderMiniV8(labelEn, labelKr, isPending, meta, key) {
   let h = '';
   h += '<div class="v8-hdr">' + _escHtml(labelEn) + '</div>';
-  h += '<div class="v-imgwrap"><div class="v-imgwrap-ph">[ IMG ]</div></div>';
+  h += '<div class="v-imgwrap">' + _renderItemImageHtml(key, { fontSize: '8px' }) + '</div>';
   h += '<div class="v8-stars">★★★ ' + (isPending ? '<span class="v-pending-tag">PENDING</span>' : 'ITEM') + ' ★★★</div>';
   h += '<div class="v-name-kr">' + _escHtml(labelKr) + '</div>';
   h += _renderMetaRows(meta, 'solid', 4);
